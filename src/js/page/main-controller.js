@@ -16,6 +16,8 @@ import ResultsContainer from './ui/results-container';
 import ViewToggler from './ui/view-toggler';
 import ResultsCache from './results-cache';
 import MainUi from './ui/main-ui';
+import { gzip } from './gzip';
+import { Ungzip } from './ungzip';
 
 const svgo = new Svgo();
 
@@ -107,6 +109,17 @@ export default class MainController {
           duration: 3000
         });
       }
+
+      // Gzip test
+      (async () => {
+        const result = await gzip.compress('hello world');
+        console.log(result);
+        const ungzip = new Ungzip();
+        const unresult = await ungzip.decompress(result);
+        ungzip.release();
+        console.log(unresult);
+        console.log(new TextDecoder().decode(unresult));
+      })();
 
       // for testing
       // eslint-disable-next-line no-constant-condition

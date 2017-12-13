@@ -94,6 +94,7 @@ async function js(entry, outputPath) {
 const allJs = gulp.parallel(
   js.bind(null, 'js/prism-worker/index.js', 'js/'),
   js.bind(null, 'js/gzip-worker/index.js', 'js/'),
+  js.bind(null, 'js/inflate-worker/index.js', 'js/'),
   js.bind(null, 'js/svgo-worker/index.js', 'js/'),
   js.bind(null, 'js/sw/index.js', ''),
   js.bind(null, 'js/page/index.js', 'js/')
