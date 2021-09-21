@@ -115,6 +115,7 @@ async function html() {
         title: `SVGOMG - SVGO's Missing GUI`,
         description: 'Easy & visual compression of SVG images.',
         appleTouchIcon: 'imgs/apple-touch-icon.png',
+        faviconPath: 'imgs/favicon.png',
         iconPath: 'imgs/icon.png',
       }),
     )

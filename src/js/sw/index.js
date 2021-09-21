@@ -19,7 +19,7 @@ addEventListener('install', (event) => {
         'all.css',
         'changelog.json',
         'fonts/code-latin.woff2',
-        'imgs/icon.png',
+        // TODO which icon?
         'js/gzip-worker.js',
         'js/page.js',
         'js/prism-worker.js',
