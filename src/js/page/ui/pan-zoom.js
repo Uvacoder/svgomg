@@ -53,7 +53,6 @@ export default class PanZoom {
     };
 
     this._onPointerMove = (event) => {
-      event.preventDefault();
       const points = getPoints(event);
       /* eslint-disable unicorn/no-array-reduce, unicorn/no-array-callback-reference */
       const averagePoint = points.reduce(getMidpoint);
@@ -136,9 +135,13 @@ export default class PanZoom {
   }
 
   _onFirstPointerDown() {
-    document.addEventListener('mousemove', this._onPointerMove);
+    document.addEventListener('mousemove', this._onPointerMove, {
+      passive: true,
+    });
     document.addEventListener('mouseup', this._onPointerUp);
-    document.addEventListener('touchmove', this._onPointerMove);
+    document.addEventListener('touchmove', this._onPointerMove, {
+      passive: true,
+    });
     document.addEventListener('touchend', this._onPointerUp);
   }
 
