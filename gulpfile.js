@@ -16,6 +16,7 @@ const { nodeResolve: rollupResolve } = require('@rollup/plugin-node-resolve');
 const rollupCommon = require('@rollup/plugin-commonjs');
 const rollupReplace = require('@rollup/plugin-replace');
 const { terser: rollupTerser } = require('rollup-plugin-terser');
+const pkg = require('./package.json');
 
 const IS_DEV_TASK =
   process.argv.includes('dev') || process.argv.includes('--dev');
@@ -109,9 +110,9 @@ async function html() {
         headCSS,
         SVGOMG_VERSION: changelog[0].version,
         SVGO_VERSION,
-        liveBaseUrl: 'https://jakearchibald.github.io/svgomg/',
+        liveBaseUrl: pkg.homepage,
         title: `SVGOMG - SVGO's Missing GUI`,
-        description: 'Easy & visual compression of SVG images.',
+        description: pkg.description,
         appleTouchIcon: 'imgs/apple-touch-icon.png',
         faviconPath: 'imgs/favicon.png',
         iconPath: 'imgs/icon.png',
