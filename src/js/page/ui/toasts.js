@@ -22,7 +22,7 @@ class Toast {
 
     for (const button of buttons) {
       const buttonElement = document.createElement('button');
-      buttonElement.className = 'unbutton';
+      buttonElement.className = 'btn-reset';
       buttonElement.textContent = button;
       buttonElement.type = 'button';
       buttonElement.addEventListener('click', () => {
