@@ -12,7 +12,7 @@ import Toasts from './ui/toasts.js';
 import FileDrop from './ui/file-drop.js';
 import Preloader from './ui/preloader.js';
 import Changelog from './ui/changelog.js';
-import ResultsContainer from './ui/results-container.js';
+import resultsContainer from './ui/results-container.js';
 import ViewToggler from './ui/view-toggler.js';
 import ResultsCache from './results-cache.js';
 import MainUi from './ui/main-ui.js';
@@ -35,9 +35,8 @@ export default class MainController {
     const dropUi = new FileDrop();
     const preloaderUi = new Preloader();
     const changelogUi = new Changelog(self.svgomgVersion);
-    // _resultsContainerUi is unused
-    this._resultsContainerUi = new ResultsContainer(this._resultsUi);
     const viewTogglerUi = new ViewToggler();
+    resultsContainer(this._resultsUi);
 
     // ui events
     this._settingsUi.emitter.on('change', () => this._onSettingsChange());

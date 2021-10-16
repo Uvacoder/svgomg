@@ -1,26 +1,22 @@
 import { domReady } from '../utils.js';
 
-export default class ResultsContainer {
-  constructor(results) {
-    this._results = results;
+export default function resultsContainer(results) {
+  domReady.then(() => {
+    const container = document.querySelector('.results-container');
+    const mobileContainer = document.querySelector('.results-container-mobile');
+    const query = matchMedia('(min-width: 640px)');
 
-    domReady.then(() => {
-      this._container = document.querySelector('.results-container');
-      this._mobileContainer = document.querySelector(
-        '.results-container-mobile',
-      );
-      this._query = matchMedia('(min-width: 640px)');
+    const positionResults = () => {
+      if (query.matches) {
+        container.append(results.container);
+      } else {
+        mobileContainer.append(results.container);
+      }
+    };
 
-      this._query.addListener(() => this._positionResults());
-      this._positionResults();
-    });
-  }
-
-  _positionResults() {
-    if (this._query.matches) {
-      this._container.append(this._results.container);
-    } else {
-      this._mobileContainer.append(this._results.container);
-    }
-  }
+    // TODO: addListener() is deprecated but Safari prior to v14 is using it
+    // Replace it with: addEventListener('change', () => positionResults()
+    query.addListener(() => positionResults());
+    positionResults();
+  });
 }
