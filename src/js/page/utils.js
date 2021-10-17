@@ -1,12 +1,3 @@
-export const domReady = new Promise((resolve) => {
-  function checkState() {
-    if (document.readyState !== 'loading') resolve();
-  }
-
-  document.addEventListener('readystatechange', checkState);
-  checkState();
-});
-
 const range = document.createRange();
 range.selectNode(document.documentElement);
 

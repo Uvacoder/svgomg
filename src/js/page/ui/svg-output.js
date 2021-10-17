@@ -1,4 +1,4 @@
-import { domReady, strToEl } from '../utils.js';
+import { strToEl } from '../utils.js';
 import PanZoom from './pan-zoom.js';
 
 export default class SvgOutput {
@@ -15,10 +15,8 @@ export default class SvgOutput {
     this._svgFrame = this.container.querySelector('.svg-frame');
     this._svgContainer = this.container.querySelector('.svg-container');
 
-    domReady.then(() => {
-      this._panZoom = new PanZoom(this._svgContainer, {
-        eventArea: this.container,
-      });
+    this._panZoom = new PanZoom(this._svgContainer, {
+      eventArea: this.container,
     });
   }
 

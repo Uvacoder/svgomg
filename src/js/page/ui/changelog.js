@@ -1,9 +1,4 @@
-import {
-  strToEl,
-  escapeHtmlTag,
-  transitionToClass,
-  domReady,
-} from '../utils.js';
+import { strToEl, escapeHtmlTag, transitionToClass } from '../utils.js';
 
 export default class Changelog {
   constructor(loadedVersion) {
@@ -41,7 +36,6 @@ export default class Changelog {
       strToEl(`<ul>${changeList.join('')}</ul>`),
     );
 
-    await domReady;
     transitionToClass(this.container);
   }
 }

@@ -1,7 +1,6 @@
 import { createNanoEvents } from 'nanoevents';
 import {
   strToEl,
-  domReady,
   transitionToClass,
   transitionFromClass,
   readFileAsText,
@@ -16,14 +15,10 @@ export default class FileDrop {
     this._activeEnters = 0;
     this._currentEnteredElement = null;
 
-    domReady.then(() => {
-      document.addEventListener('dragover', (event) => event.preventDefault());
-      document.addEventListener('dragenter', (event) =>
-        this._onDragEnter(event),
-      );
-      document.addEventListener('dragleave', () => this._onDragLeave());
-      document.addEventListener('drop', (event) => this._onDrop(event));
-    });
+    document.addEventListener('dragover', (event) => event.preventDefault());
+    document.addEventListener('dragenter', (event) => this._onDragEnter(event));
+    document.addEventListener('dragleave', () => this._onDragLeave());
+    document.addEventListener('drop', (event) => this._onDrop(event));
   }
 
   _onDragEnter(event) {

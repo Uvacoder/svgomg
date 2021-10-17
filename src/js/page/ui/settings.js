@@ -1,5 +1,4 @@
 import { createNanoEvents } from 'nanoevents';
-import { domReady } from '../utils.js';
 import MaterialSlider from './material-slider.js';
 import Ripple from './ripple.js';
 
@@ -8,43 +7,35 @@ export default class Settings {
     this.emitter = createNanoEvents();
     this._throttleTimeout = null;
 
-    domReady.then(() => {
-      this.container = document.querySelector('.settings');
-      this._pluginInputs = [
-        ...this.container.querySelectorAll('.plugins input'),
-      ];
-      this._globalInputs = [
-        ...this.container.querySelectorAll('.global input'),
-      ];
+    this.container = document.querySelector('.settings');
+    this._pluginInputs = [...this.container.querySelectorAll('.plugins input')];
+    this._globalInputs = [...this.container.querySelectorAll('.global input')];
 
-      const scroller = this.container.querySelector('.settings-scroller');
-      const resetBtn = this.container.querySelector('.setting-reset');
-      const ranges = this.container.querySelectorAll('input[type=range]');
+    const scroller = this.container.querySelector('.settings-scroller');
+    const resetBtn = this.container.querySelector('.setting-reset');
+    const ranges = this.container.querySelectorAll('input[type=range]');
 
-      this._resetRipple = new Ripple();
-      resetBtn.append(this._resetRipple.container);
+    this._resetRipple = new Ripple();
+    resetBtn.append(this._resetRipple.container);
 
-      // map real range elements to Slider instances
-      this._sliderMap = new WeakMap();
+    // map real range elements to Slider instances
+    this._sliderMap = new WeakMap();
 
-      // enhance ranges
-      for (const range of ranges) {
-        this._sliderMap.set(range, new MaterialSlider(range));
-      }
+    // enhance ranges
+    for (const range of ranges) {
+      this._sliderMap.set(range, new MaterialSlider(range));
+    }
 
-      this.container.addEventListener('input', (event) =>
-        this._onChange(event),
-      );
-      resetBtn.addEventListener('click', () => this._onReset());
+    this.container.addEventListener('input', (event) => this._onChange(event));
+    resetBtn.addEventListener('click', () => this._onReset());
 
-      // TODO: revisit this
-      // Stop double-tap text selection.
-      // This stops all text selection which is kinda sad.
-      // I think this code will bite me.
-      scroller.addEventListener('mousedown', (event) => {
-        if (event.target.closest('input[type=range]')) return;
-        event.preventDefault();
-      });
+    // TODO: revisit this
+    // Stop double-tap text selection.
+    // This stops all text selection which is kinda sad.
+    // I think this code will bite me.
+    scroller.addEventListener('mousedown', (event) => {
+      if (event.target.closest('input[type=range]')) return;
+      event.preventDefault();
     });
   }
 

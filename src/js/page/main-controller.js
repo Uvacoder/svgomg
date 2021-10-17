@@ -1,6 +1,5 @@
 import { idbKeyval as storage } from '../utils/storage.js';
 import Svgo from './svgo.js';
-import { domReady } from './utils.js';
 import Output from './ui/output.js';
 import DownloadButton from './ui/download-button.js';
 import CopyButton from './ui/copy-button.js';
@@ -80,53 +79,49 @@ export default class MainController {
       storage.set('last-seen-version', self.svgomgVersion);
     });
 
-    domReady.then(() => {
-      const container = document.querySelector('.app-output');
-      const actionContainer = container.querySelector(
-        '.action-button-container',
-      );
-      const minorActionContainer = container.querySelector(
-        '.minor-action-container',
-      );
-      const toolbarElement = container.querySelector('.toolbar');
-      const outputElement = container.querySelector('.output');
-      const menuExtraElement = container.querySelector('.menu-extra');
+    const container = document.querySelector('.app-output');
+    const actionContainer = container.querySelector('.action-button-container');
+    const minorActionContainer = container.querySelector(
+      '.minor-action-container',
+    );
+    const toolbarElement = container.querySelector('.toolbar');
+    const outputElement = container.querySelector('.output');
+    const menuExtraElement = container.querySelector('.menu-extra');
 
-      // elements for intro anim
-      this._mainUi = new MainUi(
-        toolbarElement,
-        actionContainer,
-        this._outputUi.container,
-        this._settingsUi.container,
-      );
+    // elements for intro anim
+    this._mainUi = new MainUi(
+      toolbarElement,
+      actionContainer,
+      this._outputUi.container,
+      this._settingsUi.container,
+    );
 
-      minorActionContainer.append(
-        bgFillUi.container,
-        this._copyButtonUi.container,
-      );
-      actionContainer.append(this._downloadButtonUi.container);
-      outputElement.append(this._outputUi.container);
-      container.append(this._toastsUi.container, dropUi.container);
-      menuExtraElement.append(changelogUi.container);
+    minorActionContainer.append(
+      bgFillUi.container,
+      this._copyButtonUi.container,
+    );
+    actionContainer.append(this._downloadButtonUi.container);
+    outputElement.append(this._outputUi.container);
+    container.append(this._toastsUi.container, dropUi.container);
+    menuExtraElement.append(changelogUi.container);
 
-      // load previous settings
-      this._loadSettings();
+    // load previous settings
+    this._loadSettings();
 
-      // someone managed to hit the preloader, aww
-      if (preloaderUi.activated) {
-        this._toastsUi.show('Ready now!', { duration: 3000 });
-      }
+    // someone managed to hit the preloader, aww
+    if (preloaderUi.activated) {
+      this._toastsUi.show('Ready now!', { duration: 3000 });
+    }
 
-      // for testing
-      // eslint-disable-next-line no-constant-condition
-      if (false) {
-        (async () => {
-          const filename = 'car-lite.svg';
-          const data = await fetch(filename).then((response) => response.text());
-          this._onInputChange({ data, filename });
-        })();
-      }
-    });
+    // for testing
+    // eslint-disable-next-line no-constant-condition
+    if (false) {
+      (async () => {
+        const filename = 'car-lite.svg';
+        const data = await fetch(filename).then((response) => response.text());
+        this._onInputChange({ data, filename });
+      })();
+    }
   }
 
   _onGlobalKeyDown(event) {
