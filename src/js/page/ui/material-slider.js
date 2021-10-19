@@ -23,16 +23,12 @@ export default class MaterialSlider {
     this._range.parentNode.insertBefore(this.container, this._range);
     this.container.insertBefore(this._range, this.container.firstChild);
 
-    this._range.addEventListener('input', () => this._onInputChange());
+    this._range.addEventListener('input', () => this._update());
     this._range.addEventListener('mousedown', () => this._onRangeMouseDown());
-    this._range.addEventListener(
-      'touchstart',
-      () => this._onRangeTouchStart(),
-      {
-        passive: true,
-      },
-    );
-    this._range.addEventListener('touchend', () => this._onRangeTouchEnd());
+    this._range.addEventListener('touchstart', () => this._range.focus(), {
+      passive: true,
+    });
+    this._range.addEventListener('touchend', () => this._range.blur());
 
     this._setPosition();
   }
@@ -41,14 +37,6 @@ export default class MaterialSlider {
   set value(newValue) {
     this._range.value = newValue;
     this._update();
-  }
-
-  _onRangeTouchStart() {
-    this._range.focus();
-  }
-
-  _onRangeTouchEnd() {
-    this._range.blur();
   }
 
   _onRangeMouseDown() {
@@ -63,10 +51,6 @@ export default class MaterialSlider {
     };
 
     document.addEventListener('mouseup', upListener);
-  }
-
-  _onInputChange() {
-    this._update();
   }
 
   _update() {
