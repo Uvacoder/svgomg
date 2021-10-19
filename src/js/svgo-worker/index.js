@@ -88,7 +88,7 @@ const actions = {
   },
 };
 
-self.onmessage = (event) => {
+self.addEventListener('message', (event) => {
   try {
     self.postMessage({
       id: event.data.id,
@@ -100,4 +100,4 @@ self.onmessage = (event) => {
       error: error.message,
     });
   }
-};
+});
