@@ -33,6 +33,9 @@ jobs:
       - name: Build
         run: npm run build
 
+      - name: Size limit
+        run: npm run size
+
       - name: Upload build files
         uses: actions/upload-artifact@v2
         if: github.repository == 'jakearchibald/svgomg' && github.ref == 'refs/heads/live'

@@ -1,0 +1,22 @@
+[
+  {
+    "path": "build/sw.js",
+    "limit": "1 kB"
+  },
+  {
+    "path": "build/js/page.js",
+    "limit": "8.5 kB"
+  },
+  {
+    "path": "build/js/gzip-worker.js",
+    "limit": "9 kB"
+  },
+  {
+    "path": "build/js/prism-worker.js",
+    "limit": "6.8 kB"
+  },
+  {
+    "path": "build/js/svgo-worker.js",
+    "limit": "127.25 kB"
+  }
+]
