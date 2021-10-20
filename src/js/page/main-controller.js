@@ -155,23 +155,18 @@ export default class MainController {
   _onUpdateFound(registration) {
     const newWorker = registration.installing;
 
-    registration.installing.addEventListener('statechange', async () => {
+    newWorker.addEventListener('statechange', async () => {
       if (this._reloading) return;
+      const isServiceWorkerActive = navigator.serviceWorker.controller;
 
       // the very first activation!
       // tell the user stuff works offline
-      if (
-        newWorker.state === 'activated' &&
-        !navigator.serviceWorker.controller
-      ) {
+      if (newWorker.state === 'activated' && !isServiceWorkerActive) {
         this._toastsUi.show('Ready to work offline', { duration: 5000 });
         return;
       }
 
-      if (
-        newWorker.state === 'activated' &&
-        navigator.serviceWorker.controller
-      ) {
+      if (newWorker.state === 'activated' && isServiceWorkerActive) {
         // if the user hasn't interacted yet, do a sneaky reload
         if (!this._userHasInteracted) {
           this._reloading = true;
