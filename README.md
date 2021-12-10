@@ -1,5 +1,8 @@
 # SVGOMG!
 
+- https://github.com/jakearchibald/svgomg
+
+
 [SVGOMG](https://jakearchibald.github.io/svgomg/) is **[SVGO](https://github.com/svg/svgo)**'s **M**issing **G**UI, aiming to expose the majority, if not all the configuration options of SVGO.
 
 ## Feature requests
