@@ -11,7 +11,7 @@
   "bugs": {
     "url": "https://github.com/jakearchibald/svgomg/issues"
   },
-  "homepage": "https://jakearchibald.github.io/svgomg/",
+  "homepage": "https://uvacoder.github.io/svgomg/",
   "license": "MIT",
   "devDependencies": {
     "@rollup/plugin-commonjs": "^20.0.0",
