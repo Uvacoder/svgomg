@@ -48,7 +48,7 @@ async function html() {
         headCSS,
         changelog,
         SVGO_VERSION: svgoPkg.version,
-        liveBaseUrl: 'https://jakearchibald.github.io/svgomg/',
+        liveBaseUrl: 'https://uvacoder.github.io/svgomg/',
         title: `SVGOMG - SVGO's Missing GUI`,
         description: 'Easy & visual compression of SVG images.',
         iconPath: 'imgs/icon.png',
